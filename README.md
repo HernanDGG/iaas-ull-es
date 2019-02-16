@@ -419,3 +419,12 @@ Ahora podemos salir de la cuenta y el servicio continúa ejecutandose.
 * <a href="https://goo.gl/noagxg" target="_blank">Manual de uso de pools de recursos</a>
 * <a href="https://goo.gl/D6Sw7L" target="_blank">Manual de uso de máquinas puntuales</a>
 * Tutorial sobre como usar el [Servicio VPN de la ULL](https://usuarios.ull.es/vpn/)
+
+
+# Tutorial del alumno Hernan Gonzalez
+## Conexion entre ordenador personal - iaas
+
+Primero iniciamos en la maquina del iaas con las credenciales “usuario/usuario” y nos pedira cambiar la contraseña, una vez hecho eso usamos el comando ifconfig para conseguir la ip que usaremos para hacer ssh en nuestro ordenador. Cogemos la ip de “ens3” de la maquina de iaas y en nuestra terminal pondremos el comando “usuario@(ip)”.
+
+A continuacion nos pedira una contaseña que será la creada en la maquina de iaas.
+
