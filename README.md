@@ -419,3 +419,55 @@ Ahora podemos salir de la cuenta y el servicio continúa ejecutandose.
 * <a href="https://goo.gl/noagxg" target="_blank">Manual de uso de pools de recursos</a>
 * <a href="https://goo.gl/D6Sw7L" target="_blank">Manual de uso de máquinas puntuales</a>
 * Tutorial sobre como usar el [Servicio VPN de la ULL](https://usuarios.ull.es/vpn/)
+
+# Tutorial del alumno Hernan Gonzalez
+### Enlazar ordenador personal con la maquina IAAS
+Primero iniciamos en la maquina del iaas con las credenciales “usuario/usuario” y nos pedira cambiar la contraseña, una vez hecho eso usamos el comando ifconfig para conseguir la ip que usaremos para hacer ssh en nuestro ordenador. Cogemos la ip de “ens3” de la maquina de iaas y en nuestra terminal pondremos el comando _**usuario@(ip)**_.
+
+A continuacion nos pedira una contaseña que será la creada en la maquina de iaas.
+
+![principio](https://user-images.githubusercontent.com/23243983/52904963-f4e25680-322a-11e9-9b40-8b3eb5d8d3bb.png)
+
+Ahora crearemos las claves privadas y publicas, para ello usaremos el comando _**ssh-keygen -trsa**_ en nuestra terminal. Ya tenemos las claves que usaremos para conectar nuestro pc con iaas
+Crearemos el archivo _`config`_ en `~/.ssh` y lo editaremos poniendo lo siguiente:
+	#DSI 18/19
+	#Host (nombre_para_acceder)
+	HostName (ip_maquina_iaas)
+	IdentityFile (ruta_al_archivo_de_claves)
+
+Ahora ya podemos acceder con el ssh sin necesidad de contraseña o de poner la ip de la maquina de iias, para ellos es suficiente que en la terminal de nuestro ordenador pongamos _**ssh (nombre_para_acceder)**_
+
+![ssh1](https://user-images.githubusercontent.com/23243983/52905030-f1030400-322b-11e9-8ddb-c44246f8a829.png)
+
+Se creará un directorio en la maquina del iaas llamado _`.ssh`_ y dentro de este haremos un archivo _`authorized_keys`_ donde meteremos el contenido del archivo _`miclave.pub`_ de nuestro ordenador
+
+**No olvidar hacer utilizar las keys para enlazar el github con nuestro ordenador personal**
+
+### Desplegando la aplicacion web
+Lo siguiente será todo dentro de nuestra maquina del iaas. Primero crearemos un directorio para la aplicación con _`mkdir [nombre_directorio]`_:
+
+![crea_dir](https://user-images.githubusercontent.com/23243983/52905113-54416600-322d-11e9-8fa9-62cdc3958abb.png)
+
+Ahora para clonar el repositorio de github donde se encuentra nuestra app web, necesitaremos repetir el paso de enlazado con github, pero esta vez no es entre nuestro ordenador y github, sino entre la maquina de iaas y github, para eso crear una llave con _**ssh-keygen -trsa**_ y copiamos esa clave del _`id_rsa.pub`_ en un Nuevo SSH key de github.
+
+![ssh2](https://user-images.githubusercontent.com/23243983/52905136-bef2a180-322d-11e9-981f-3b3a08c99be0.png)
+
+Ahora ya podemos desplegar el repositorio ejecutando _**git clone (ruta del repositorio en github)**_, esperando que nos salga lo siguiente:
+
+![despliega_rep](https://user-images.githubusercontent.com/23243983/52905147-f4978a80-322d-11e9-8e19-950c0537d247.png)
+
+Ya tenemos desplegado el repositorio de github en nuestra maquina, primero tendremos que cambiar el puerto de escucha del archivo _`hello.js`_ a **80**
+
+![hello_edita](https://user-images.githubusercontent.com/23243983/52905162-26a8ec80-322e-11e9-9c63-a9b8d41001fd.png)
+
+Instalamos las dependencias con _**npm install**_ y comprobamos que se instalo correctamente usando de ejemplo el _`hello.js`_:
+
+![npm](https://user-images.githubusercontent.com/23243983/52905173-4dffb980-322e-11e9-96bb-6365bfcbe004.png)
+
+Y para finalizar, para entrar a la pagina cogemos la direccion que aparece al ejecutar _**sudo (ruta de node) (nombre json)**_ y luego ejecutaremos el comando _**nohup sudo -b node (nombre json)**_ para que aunque cerremos la app web siga activa, y copiamos la direccion que obtuvimos antes, en nuestro navegador:
+
+![pieapp](https://user-images.githubusercontent.com/23243983/52905194-b058ba00-322e-11e9-881d-1410dceb481c.png)
+
+Aqui un ejemplo de como quedó nuestra app web desplegada:
+
+![captura de pantalla de 2019-02-16 21-17-46](https://user-images.githubusercontent.com/23243983/52905306-578a2100-3230-11e9-82bb-d43b1b98a500.png)
