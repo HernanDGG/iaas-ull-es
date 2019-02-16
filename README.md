@@ -470,4 +470,4 @@ Y para finalizar, para entrar a la pagina cogemos la direccion que aparece al ej
 
 Aqui un ejemplo de como quedó nuestra app web desplegada:
 
-![captura de pantalla de 2019-02-16 21-17-46](https://user-images.githubusercontent.com/23243983/52905306-578a2100-3230-11e9-82bb-d43b1b98a500.png)
+![app](https://user-images.githubusercontent.com/23243983/52905306-578a2100-3230-11e9-82bb-d43b1b98a500.png)
